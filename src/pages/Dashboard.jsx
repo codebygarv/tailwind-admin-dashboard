@@ -290,7 +290,7 @@ export default function Dashboard() {
             <p className="text-gray-500 text-sm">Total for the selected range</p>
           </div>
 
-          <div className="flex gap-2 mt-3 lg:mt-0">
+          <div className="flex flex-wrap gap-2 mt-3 lg:mt-0">
             {[
               { label: "Last 3 months", key: "90" },
               { label: "Last 30 days", key: "30" },
@@ -298,11 +298,10 @@ export default function Dashboard() {
             ].map((tab) => (
               <button
                 key={tab.key}
-                className={`px-3 py-1.5 rounded-md text-sm border transition ${
-                  activeTab === tab.key
+                className={`px-3 py-1.5 rounded-md text-sm border transition ${activeTab === tab.key
                     ? "bg-white text-black"
                     : "bg-transparent border-white/10 text-gray-300"
-                }`}
+                  }`}
                 onClick={() => setActiveTab(tab.key)}
               >
                 {tab.label}
@@ -331,20 +330,20 @@ export default function Dashboard() {
 
       {/* User Management Table */}
       <div className="bg-[#111111] border border-white/10 rounded-2xl p-4 shadow text-white">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
           <div>
             <h3 className="text-lg font-semibold">User Management</h3>
             <p className="text-gray-500 text-sm">Manage users, assign reviewers, and bulk actions</p>
           </div>
 
           {/* Bulk controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <input
               type="text"
               placeholder="Search name or email..."
               value={query}
               onChange={(e) => { setQuery(e.target.value); setPage(1); }}
-              className="bg-white/3 placeholder-gray-400 text-sm px-3 py-2 rounded-md outline-none border border-white/8"
+              className="flex-1 min-w-[140px] bg-white/3 placeholder-gray-400 text-sm px-3 py-2 rounded-md outline-none border border-white/8"
             />
 
             <select
@@ -517,14 +516,14 @@ export default function Dashboard() {
         </div>
 
         {/* Pagination */}
-        <div className="mt-4 flex items-center justify-between text-sm">
-          <div className="text-gray-400">
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
+          <div className="text-gray-400 text-center sm:text-left">
             Showing <span className="text-white">{(page - 1) * PAGE_SIZE + 1}</span> -{" "}
             <span className="text-white">{Math.min(page * PAGE_SIZE, sorted.length)}</span> of{" "}
             <span className="text-white">{sorted.length}</span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center sm:justify-end gap-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}

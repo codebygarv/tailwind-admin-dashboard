@@ -12,9 +12,10 @@ import {
   User,
   Bell,
   CreditCard,
+  X,
 } from "lucide-react";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, setIsOpen }) {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef(null);
 
@@ -56,12 +57,21 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="fixed">
-      <aside className="w-60 h-screen bg-[#0f0f0f] text-white flex flex-col justify-between border-r border-white/10 relative">
+    <div
+      className={`fixed inset-y-0 left-0 z-40 w-60 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+    >
+      <aside className="w-full h-screen bg-[#0f0f0f] text-white flex flex-col justify-between border-r border-white/10 relative">
         {/* Logo */}
         <div>
-          <div className="p-3 text-lg font-semibold flex items-center gap-1.5 border-b border-white/10">
-            Admin Dashboard
+          <div className="p-3 text-lg font-semibold flex items-center justify-between border-b border-white/10">
+            <span className="flex items-center gap-1.5">Admin Dashboard</span>
+            <button
+              className="lg:hidden text-gray-400 hover:text-white transition-colors p-1"
+              onClick={() => setIsOpen(false)}
+            >
+              <X size={20} />
+            </button>
           </div>
 
           {/* Navigation */}
@@ -77,10 +87,9 @@ export default function Sidebar() {
                       key={link.to}
                       to={link.to}
                       className={({ isActive }) =>
-                        `flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ${
-                          isActive
-                            ? "bg-orange-500/20 text-orange-400"
-                            : "text-gray-300 hover:bg-orange-500/10 hover:text-orange-400"
+                        `flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ${isActive
+                          ? "bg-orange-500/20 text-orange-400"
+                          : "text-gray-300 hover:bg-orange-500/10 hover:text-orange-400"
                         }`
                       }
                     >
@@ -101,10 +110,9 @@ export default function Sidebar() {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ${
-                  isActive
-                    ? "bg-orange-500/20 text-orange-400"
-                    : "text-gray-300 hover:bg-orange-500/10 hover:text-orange-400"
+                `flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ${isActive
+                  ? "bg-orange-500/20 text-orange-400"
+                  : "text-gray-300 hover:bg-orange-500/10 hover:text-orange-400"
                 }`
               }
             >
